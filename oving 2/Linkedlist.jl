@@ -19,20 +19,24 @@ function createlinkedlist(length)
 end
 
 function findindexinlist(linkedlist, index)
-    for i = 1:(index-1)
-        if(typeof(linkedlist.next) == Nothing)
-            return -1
-        end
+    if (index == 1)
+        return linkedlist.value
+    end
+    i = 1
+    while typeof(linkedlist.next) != Nothing
         linkedlist = linkedlist.next
+        i = i+1
+        if (i == index)
+            return linkedlist.value
+        end
     end
-    if typeof(linkedlist) == Nothing
-        return -1
-    end
-    return linkedlist.value
+    return -1
 end
 
 
 linkedList = createlinkedlist(5)
 println(linkedList)
 println(findindexinlist(linkedList, 2))
+println(findindexinlist(linkedList, 6))
+println(findindexinlist(linkedList, 5))
 println(findindexinlist(linkedList, 8))
