@@ -38,4 +38,4 @@ println(binaryintervalsearch(x, 1, 2))
 println(binaryintervalsearch(x, 1, 1))
 x = [1.0 0.0; 2.0 0.0; 3.0 0.0]
 println(binaryintervalsearch(x, 0.5, 2))
-println(binaryintervalsearch(x, 0.5, 1))
+println(binaryintervalsearch(x, 0.5, 1)[1])
