@@ -22,7 +22,6 @@ function searchtree(root, dna)
 		currentnode = currentnode.children[c]
 	end
 	return currentnode.count
-
 end
 
 
