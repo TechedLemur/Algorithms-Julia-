@@ -33,9 +33,35 @@ function findclusters(E::Vector{Tuple{Int, Int, Int}}, n::Int, k::Int)
         push!(nodes, DisjointSetNode())
     end
     sort!(E)
+
+    c = n
+    i = 1
+    while c > k
+        edge = E[i]
+        u = nodes[edge[2]]
+        v = nodes[edge[3]]
+
+        if (findset(u) != findset(v))
+            union!(u, v)
+            c -= 1
+        end
+        i += 1
+    end
     ans = []
-    for edge in E
-        if 
-
-
+    for i = 1:length(nodes)
+        temp = [i]
+        for j = 1:length(nodes)
+            if findset(nodes[i]) == findset(nodes[j])
+                temp = union(temp, j)
+                sort!(temp)
+            end
+        end
+        if temp ∉ ans
+            push!(ans, temp)
+        end
+    end
+    return ans
 end
+
+E=Tuple{Int64,Int64,Int64}[(1, 1, 2), (2, 1, 3), (3, 2, 3), (1, 2, 1), (2, 3, 1), (3, 3, 2)]
+println(findclusters(E, 3, 2))

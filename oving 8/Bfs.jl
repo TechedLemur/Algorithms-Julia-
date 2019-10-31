@@ -12,7 +12,7 @@ mutable struct Node
     predecessor::Union{Node,Nothing}
 end
 Node(i, j, floor=true) = Node(i, j, floor, [], nothing, nothing, nothing)
-#Node(i, j) = Node(i, j, true, [], "white", typemax(Int), nothing)
+#Node(i, j, floor=true) = Node(i, j, floor, [], "white", typemax(Int), nothing)
 
 function bfs!(nodes, start)
 
@@ -27,16 +27,18 @@ function bfs!(nodes, start)
     start.predecessor = nothing
     Q = Queue{Node}()
     enqueue!(Q, start)
+
     while (length(Q) > 0)
         u = dequeue!(Q)
+        if isgoalnode(u)
+            return u
+        end
         for v in  u.neighbors
             if v.color == "white"
                 v.color = "gray"
                 v.distance = u.distance +1
                 v.predecessor = u
-                if isgoalnode(v)
-                    return @views v
-                end
+
                 enqueue!(Q, v)
             end
         end
